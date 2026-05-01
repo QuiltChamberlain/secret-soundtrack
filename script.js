@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cassette Tape Loader
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 600);
+        }, 1500);
+    }
+
     // Intersection Observer for fade-in animations on scroll
     const observerOptions = {
         root: null,
@@ -27,6 +38,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Observe all elements with .fade-in-up class
     const animatedElements = document.querySelectorAll('.fade-in-up');
     animatedElements.forEach(el => observer.observe(el));
+    
+    // Initialize Particles
+    function initParticles() {
+        const container = document.getElementById('particles-container');
+        if (!container) return;
+
+        const notes = ['♪', '♫', '♬', '♩', '🎶'];
+        
+        setInterval(() => {
+            const particle = document.createElement('div');
+            particle.className = 'music-particle';
+            particle.textContent = notes[Math.floor(Math.random() * notes.length)];
+            
+            const left = Math.random() * 100;
+            const size = Math.random() * 1.5 + 0.5;
+            const duration = Math.random() * 10 + 10;
+            
+            particle.style.left = `${left}%`;
+            particle.style.fontSize = `${size}rem`;
+            particle.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }, 800);
+    }
+    initParticles();
     
     // Add simple interactive glow to cards based on mouse position
     const cards = document.querySelectorAll('.glass-card');
@@ -122,16 +162,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     timestamp: window.serverTimestamp()
                 });
                 
-                // Show success state
-                submitBtn.innerHTML = '&#10003; You\'re on the list!';
-                submitBtn.style.backgroundColor = '#10b981'; // Green color for success
-                submitBtn.style.opacity = '1';
-                
-                // Disable input permanently for this session
-                emailInput.value = email; // Keep their email visible
-                emailInput.disabled = true;
-                emailInput.style.opacity = '0.5';
-                emailInput.style.cursor = 'not-allowed';
+                // Generate a random ticket barcode number
+                const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
+
+                // Show success state with Golden Ticket Animation
+                waitlistForm.innerHTML = `
+                    <div class="envelope-container">
+                        <div class="envelope-wrapper">
+                            <div class="envelope-paper ticket-paper">
+                                <span class="ticket-title">VIP ACCESS</span>
+                                <span class="ticket-barcode">#${ticketNum}</span>
+                            </div>
+                            <div class="envelope-front"></div>
+                            <div class="envelope-flap"></div>
+                        </div>
+                        <div class="envelope-success-text">You're on the list!</div>
+                    </div>
+                `;
+                waitlistForm.style.display = 'block'; // Ensure form structure holds the envelope properly
                 
             } catch (error) {
                 console.error("Firestore Error:", error);

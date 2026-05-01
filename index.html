@@ -26,10 +26,21 @@
 </head>
 
 <body>
+    <!-- Cassette Tape Loader -->
+    <div class="loader-overlay" id="loader">
+        <div class="cassette">
+            <div class="cassette-label">
+                <div class="cassette-spool"></div>
+                <div class="cassette-spool"></div>
+            </div>
+            <div class="cassette-bottom"></div>
+        </div>
+    </div>
     <div class="ambient-background">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
+        <div id="particles-container"></div>
     </div>
 
     <nav class="navbar">
@@ -53,6 +64,7 @@
                     stranger, and receive a hand-picked soundtrack in return.</p>
 
                 <form class="waitlist-form" id="waitlist-form" action="#">
+                    <div class="vinyl-record"></div>
                     <input type="email" id="waitlist-email" placeholder="Enter your email address" required
                         class="glass-input" style="flex:1;">
                     <button type="submit" class="btn btn-primary" id="waitlist-submit">Get Started</button>
@@ -116,21 +128,42 @@
                             </div>
                             <div class="tracks">
                                 <div class="track">
-                                    <div class="track-icon">🎶</div>
+                                    <div class="track-icon-wrapper">
+                                        <div class="track-icon">🎶</div>
+                                        <div class="audio-visualizer">
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                        </div>
+                                    </div>
                                     <div class="track-details">
                                         <span class="track-name">Midnight City</span>
                                         <span class="track-artist">M83</span>
                                     </div>
                                 </div>
                                 <div class="track">
-                                    <div class="track-icon">🎶</div>
+                                    <div class="track-icon-wrapper">
+                                        <div class="track-icon">🎶</div>
+                                        <div class="audio-visualizer">
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                        </div>
+                                    </div>
                                     <div class="track-details">
                                         <span class="track-name">The Less I Know The Better</span>
                                         <span class="track-artist">Tame Impala</span>
                                     </div>
                                 </div>
                                 <div class="track">
-                                    <div class="track-icon">🎶</div>
+                                    <div class="track-icon-wrapper">
+                                        <div class="track-icon">🎶</div>
+                                        <div class="audio-visualizer">
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                            <div class="visualizer-bar"></div>
+                                        </div>
+                                    </div>
                                     <div class="track-details">
                                         <span class="track-name">Walking On A Dream</span>
                                         <span class="track-artist">Empire of the Sun</span>
