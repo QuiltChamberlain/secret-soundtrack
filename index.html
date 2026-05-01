@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Soundtrack | The Musical Swap Group</title>
+    <meta name="description" content="A Secret Santa inspired musical swap group where you gift playlists and discover new tunes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="ambient-background">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-icon">🎧</span>
+                Secret Soundtrack
+            </div>
+            <button class="btn btn-outline" id="nav-cta">Join Waitlist</button>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero">
+            <div class="container hero-content fade-in-up">
+                <div class="badge">Now accepting early access</div>
+                <h1 class="hero-title">Give the gift of <br><span class="text-gradient">musical discovery</span></h1>
+                <p class="hero-subtitle">A Secret Santa inspired musical swap group. Curate a custom playlist for a stranger, and receive a hand-picked soundtrack in return.</p>
+                
+                <form class="waitlist-form" action="#" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email address" required class="glass-input">
+                    <button type="submit" class="btn btn-primary">Get Started</button>
+                </form>
+                
+                <div class="social-proof">
+                    <div class="avatars">
+                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=1')"></div>
+                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=2')"></div>
+                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=3')"></div>
+                    </div>
+                    <span>Join 2,000+ music lovers waiting to swap</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="how-it-works section" id="how-it-works">
+            <div class="container">
+                <h2 class="section-title fade-in-up">How it works</h2>
+                <p class="section-subtitle fade-in-up">Four simple steps to your new favorite playlist.</p>
+                
+                <div class="steps-grid">
+                    <div class="step-card glass-card fade-in-up" style="--delay: 0.1s">
+                        <div class="step-number">01</div>
+                        <h3>Sign Up</h3>
+                        <p>Create a profile and share your musical tastes, favorite genres, and what you're looking for.</p>
+                    </div>
+                    <div class="step-card glass-card fade-in-up" style="--delay: 0.2s">
+                        <div class="step-number">02</div>
+                        <h3>Get Matched</h3>
+                        <p>We'll anonymously pair you with another music lover whose tastes align with or complement yours.</p>
+                    </div>
+                    <div class="step-card glass-card fade-in-up" style="--delay: 0.3s">
+                        <div class="step-number">03</div>
+                        <h3>Curate</h3>
+                        <p>Craft a thoughtful 10-15 track playlist tailored specifically for your match using Spotify or Apple Music.</p>
+                    </div>
+                    <div class="step-card glass-card fade-in-up" style="--delay: 0.4s">
+                        <div class="step-number">04</div>
+                        <h3>Swap & Listen</h3>
+                        <p>On Swap Day, everyone receives their secret soundtrack. Listen, discover, and discuss!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features section">
+            <div class="container">
+                <div class="features-wrapper">
+                    <div class="feature-text fade-in-up">
+                        <h2 class="section-title">Break out of the algorithm</h2>
+                        <p class="section-body">Algorithmic recommendations can leave you stuck in a loop. Secret Soundtrack brings back the human element of musical discovery. Every playlist is crafted by a real person with genuine intention.</p>
+                        <ul class="feature-list">
+                            <li>✨ Human-curated discoveries</li>
+                            <li>🤝 Connect with a global community</li>
+                            <li>🎵 Expand your sonic horizons</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual glass-card fade-in-up">
+                        <div class="mockup-playlist">
+                            <div class="playlist-header">
+                                <div class="playlist-cover"></div>
+                                <div class="playlist-info">
+                                    <h4>For My Secret Match</h4>
+                                    <p>Curated by Anonymous</p>
+                                </div>
+                            </div>
+                            <div class="tracks">
+                                <div class="track">
+                                    <div class="track-icon">🎶</div>
+                                    <div class="track-details">
+                                        <span class="track-name">Midnight City</span>
+                                        <span class="track-artist">M83</span>
+                                    </div>
+                                </div>
+                                <div class="track">
+                                    <div class="track-icon">🎶</div>
+                                    <div class="track-details">
+                                        <span class="track-name">The Less I Know The Better</span>
+                                        <span class="track-artist">Tame Impala</span>
+                                    </div>
+                                </div>
+                                <div class="track">
+                                    <div class="track-icon">🎶</div>
+                                    <div class="track-details">
+                                        <span class="track-name">Walking On A Dream</span>
+                                        <span class="track-artist">Empire of the Sun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section section fade-in-up">
+            <div class="container">
+                <div class="cta-card glass-card">
+                    <h2>Ready to swap?</h2>
+                    <p>Our next swap event starts soon. Secure your spot and get ready to share the music you love.</p>
+                    <button class="btn btn-primary btn-large">Join the Waitlist</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">🎧</span>
+                    Secret Soundtrack
+                </div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Secret Soundtrack. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
