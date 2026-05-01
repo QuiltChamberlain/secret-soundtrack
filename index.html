@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Soundtrack | The Musical Swap Group</title>
-    <meta name="description" content="A Secret Santa inspired musical swap group where you gift playlists and discover new tunes.">
+    <meta name="description"
+        content="A Secret Santa inspired musical swap group where you gift playlists and discover new tunes.">
+    <!-- Open Graph / Social Tags -->
+    <meta property="og:title" content="Secret Soundtrack">
+    <meta property="og:description"
+        content="Give the gift of musical discovery. Join the Secret Santa inspired musical swap group.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:url" content="https://secret-soundtrack.com">
+    <meta property="og:type" content="website">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
     <div class="ambient-background">
         <div class="blob blob-1"></div>
@@ -23,7 +37,11 @@
                 <span class="logo-icon">🎧</span>
                 Secret Soundtrack
             </div>
-            <button class="btn btn-outline" id="nav-cta">Join Waitlist</button>
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn btn-outline" id="nav-share" style="border: none; padding: 0.5rem;"><span
+                        style="font-size:1.2rem;">📤</span></button>
+                <button class="btn btn-outline" id="nav-cta">Join Waitlist</button>
+            </div>
         </div>
     </nav>
 
@@ -32,21 +50,16 @@
             <div class="container hero-content fade-in-up">
                 <div class="badge">Now accepting early access</div>
                 <h1 class="hero-title">Give the gift of <br><span class="text-gradient">musical discovery</span></h1>
-                <p class="hero-subtitle">A Secret Santa inspired musical swap group. Curate a custom playlist for a stranger, and receive a hand-picked soundtrack in return.</p>
-                
-                <form class="waitlist-form" action="#" onsubmit="event.preventDefault();">
-                    <input type="email" placeholder="Enter your email address" required class="glass-input">
-                    <button type="submit" class="btn btn-primary">Get Started</button>
-                </form>
-                
-                <div class="social-proof">
-                    <div class="avatars">
-                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=1')"></div>
-                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=2')"></div>
-                        <div class="avatar" style="background-image: url('https://i.pravatar.cc/100?img=3')"></div>
+                <p class="hero-subtitle">A Secret Santa inspired musical swap group. Curate a custom playlist for a
+                    stranger, and receive a hand-picked soundtrack in return.</p>
+
+                <form class="waitlist-form" id="waitlist-form" action="#">
+                    <div style="display:flex; gap:0.5rem; width:100%;">
+                        <input type="email" id="waitlist-email" placeholder="Enter your email address" required
+                            class="glass-input" style="flex:1;">
+                        <button type="submit" class="btn btn-primary" id="waitlist-submit">Get Started</button>
                     </div>
-                    <span>Join 2,000+ music lovers waiting to swap</span>
-                </div>
+                </form>
             </div>
         </header>
 
@@ -54,22 +67,25 @@
             <div class="container">
                 <h2 class="section-title fade-in-up">How it works</h2>
                 <p class="section-subtitle fade-in-up">Four simple steps to your new favorite playlist.</p>
-                
+
                 <div class="steps-grid">
                     <div class="step-card glass-card fade-in-up" style="--delay: 0.1s">
                         <div class="step-number">01</div>
                         <h3>Sign Up</h3>
-                        <p>Create a profile and share your musical tastes, favorite genres, and what you're looking for.</p>
+                        <p>Create a profile and share your musical tastes, favorite genres, and what you're looking for.
+                        </p>
                     </div>
                     <div class="step-card glass-card fade-in-up" style="--delay: 0.2s">
                         <div class="step-number">02</div>
                         <h3>Get Matched</h3>
-                        <p>We'll anonymously pair you with another music lover whose tastes align with or complement yours.</p>
+                        <p>We'll anonymously pair you with another music lover whose tastes alshign with or complement
+                            yours.</p>
                     </div>
                     <div class="step-card glass-card fade-in-up" style="--delay: 0.3s">
                         <div class="step-number">03</div>
                         <h3>Curate</h3>
-                        <p>Craft a thoughtful 10-15 track playlist tailored specifically for your match using Spotify or Apple Music.</p>
+                        <p>Craft a thoughtful 10-15 track playlist tailored specifically for your match using Spotify or
+                            Apple Music.</p>
                     </div>
                     <div class="step-card glass-card fade-in-up" style="--delay: 0.4s">
                         <div class="step-number">04</div>
@@ -85,7 +101,9 @@
                 <div class="features-wrapper">
                     <div class="feature-text fade-in-up">
                         <h2 class="section-title">Break out of the algorithm</h2>
-                        <p class="section-body">Algorithmic recommendations can leave you stuck in a loop. Secret Soundtrack brings back the human element of musical discovery. Every playlist is crafted by a real person with genuine intention.</p>
+                        <p class="section-body">Algorithmic recommendations can leave you stuck in a loop. Secret
+                            Soundtrack brings back the human element of musical discovery. Every playlist is crafted by
+                            a real person with genuine intention.</p>
                         <ul class="feature-list">
                             <li>✨ Human-curated discoveries</li>
                             <li>🤝 Connect with a global community</li>
@@ -135,7 +153,7 @@
                 <div class="cta-card glass-card">
                     <h2>Ready to swap?</h2>
                     <p>Our next swap event starts soon. Secure your spot and get ready to share the music you love.</p>
-                    <button class="btn btn-primary btn-large">Join the Waitlist</button>
+                    <button class="btn btn-primary btn-large" id="bottom-cta">Join the Waitlist</button>
                 </div>
             </div>
         </section>
@@ -161,6 +179,27 @@
         </div>
     </footer>
 
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            projectId: "secret-soundtrack-app",
+            appId: "1:270844009843:web:22b0a53342ffc72d52f906",
+            storageBucket: "secret-soundtrack-app.firebasestorage.app",
+            apiKey: "AIzaSyB92qihLjxIX7A1c22Qy42P_BYCDGELb5E",
+            authDomain: "secret-soundtrack-app.firebaseapp.com",
+            messagingSenderId: "270844009843"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.serverTimestamp = serverTimestamp;
+    </script>
     <script src="script.js"></script>
 </body>
+
 </html>

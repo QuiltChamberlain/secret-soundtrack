@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /waitlist/{document} {
+      // Only allow creation. No reading, updating, or deleting.
+      allow create: if request.resource.data.keys().hasAll(['email', 'timestamp'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.matches('.*@.*\\..*');
+    }
+    
+    // Default rule: block everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
