@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bottomCta) bottomCta.addEventListener('click', scrollToForm);
 
     // Share Feature
-    const navShare = document.getElementById('nav-share');
-    if (navShare) {
-        navShare.addEventListener('click', async () => {
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
             if (navigator.share) {
                 try {
                     await navigator.share({
