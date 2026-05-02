@@ -72,7 +72,7 @@ async function processWaitlist() {
       let trackUris = [];
       const cleanUrl = `https://open.spotify.com/playlist/${sourcePlaylistId}`;
       
-      console.log(`  -> 📖 Scraping tracks from Drop-Box...`);
+      console.log(`  -> 📖 Scraping tracks from submitted Spotify playlist...`);
       // Add a 2-second delay to avoid rate limiting from frequent scrapes
       await new Promise(resolve => setTimeout(resolve, 2000));
       
