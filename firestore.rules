@@ -2,10 +2,12 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /waitlist/{document} {
-      // Only allow creation. No reading, updating, or deleting.
-      allow create: if request.resource.data.keys().hasAll(['email', 'timestamp'])
+      // Allow write (create and update) for deduplication. No reading or deleting.
+      allow write: if request.resource.data.keys().hasAll(['email', 'playlistUrl', 'timestamp'])
                     && request.resource.data.email is string
-                    && request.resource.data.email.matches('.*@.*\\..*');
+                    && request.resource.data.email.matches('.*@.*\\..*')
+                    && request.resource.data.playlistUrl is string
+                    && (request.resource.data.playlistUrl == '' || request.resource.data.playlistUrl.matches('^https?://.*'));
     }
     
     // Default rule: block everything else

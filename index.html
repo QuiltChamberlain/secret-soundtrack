@@ -65,9 +65,13 @@
 
                 <form class="waitlist-form" id="waitlist-form" action="#">
                     <div class="vinyl-record"></div>
-                    <input type="email" id="waitlist-email" placeholder="Enter your email address" required
-                        class="glass-input" style="flex:1;">
-                    <button type="submit" class="btn btn-primary" id="waitlist-submit">Get Started</button>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
+                        <input type="email" id="waitlist-email" placeholder="Enter your email address" required
+                            class="glass-input">
+                        <input type="url" id="waitlist-playlist" placeholder="Link your favorite playlist (Optional)"
+                            class="glass-input">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="waitlist-submit" style="align-self: center; height: fit-content;">Get Started</button>
                 </form>
                 
                 <div class="share-container fade-in-up" style="--delay: 0.2s; margin-top: 1rem;">
@@ -210,7 +214,7 @@
     <!-- Firebase App (the core Firebase SDK) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
         const firebaseConfig = {
             projectId: "secret-soundtrack-app",
@@ -225,6 +229,8 @@
         window.db = getFirestore(app);
         window.collection = collection;
         window.addDoc = addDoc;
+        window.doc = doc;
+        window.setDoc = setDoc;
         window.serverTimestamp = serverTimestamp;
     </script>
     <script src="script.js"></script>

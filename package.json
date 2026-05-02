@@ -1,0 +1,28 @@
+{
+  "name": "secret-soundtrack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuiltChamberlain/secret-soundtrack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/QuiltChamberlain/secret-soundtrack/issues"
+  },
+  "homepage": "https://github.com/QuiltChamberlain/secret-soundtrack#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "firebase-admin": "^13.8.0",
+    "spotify-url-info": "^3.3.0",
+    "spotify-web-api-node": "^5.0.2"
+  }
+}

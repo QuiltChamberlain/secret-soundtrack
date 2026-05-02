@@ -140,12 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             const emailInput = document.getElementById('waitlist-email');
+            const playlistInput = document.getElementById('waitlist-playlist');
             const submitBtn = document.getElementById('waitlist-submit');
             
             const email = emailInput.value.trim();
+            const playlist = playlistInput ? playlistInput.value.trim() : '';
             
             if (!email) return;
-            if (!window.db || !window.addDoc) {
+            if (!window.db || !window.setDoc || !window.doc) {
                 alert("Database not initialized yet. Please try again in a moment.");
                 return;
             }
@@ -156,9 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.style.opacity = '0.7';
             
             try {
-                const waitlistCol = window.collection(window.db, 'waitlist');
-                await window.addDoc(waitlistCol, {
+                const docRef = window.doc(window.db, 'waitlist', email.toLowerCase());
+                await window.setDoc(docRef, {
                     email: email,
+                    playlistUrl: playlist,
                     timestamp: window.serverTimestamp()
                 });
                 
