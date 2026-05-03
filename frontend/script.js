@@ -152,18 +152,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Joining...';
+            const labelText = submitBtn.querySelector('.vinyl-label-text');
+            const originalHTML = submitBtn.innerHTML;
+            if (labelText) labelText.innerHTML = '<span style="font-size: 0.5rem; letter-spacing: 0;">SENDING</span>';
             submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-            
+            submitBtn.classList.add('playing');
             try {
-                const docRef = window.doc(window.db, 'waitlist', email.toLowerCase());
+                const docRef = window.doc(window.db, 'campaigns', 'waitlist', 'submissions', email.toLowerCase());
                 await window.setDoc(docRef, {
                     email: email,
                     playlistUrl: playlist,
-                    timestamp: window.serverTimestamp()
-                });
+                    lastUpdatedAt: window.serverTimestamp()
+                }, { merge: true });
                 
                 // Generate a random ticket barcode number
                 const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
@@ -187,9 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error("Firestore Error:", error);
                 alert("Failed to join waitlist. Please try again later.");
-                submitBtn.textContent = originalText;
+                submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
+                submitBtn.classList.remove('playing');
             }
         });
     }

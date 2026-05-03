@@ -4,7 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "process": "node process.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,10 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "firebase-admin": "^13.8.0",
+    "googleapis": "^171.4.0",
+    "node-youtube-music": "^0.10.3",
     "spotify-url-info": "^3.3.0",
-    "spotify-web-api-node": "^5.0.2"
+    "spotify-web-api-node": "^5.0.2",
+    "ytmusic-api": "^5.3.1"
   }
 }
