@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 waitlistForm.style.display = 'block'; // Ensure form structure holds the envelope properly
                 
             } catch (error) {
-                console.error("Firestore Error:", error);
-                alert("Failed to join waitlist. Please try again later.");
+                console.error("Firestore Error:", error.code, error.message, error);
+                alert(`Failed to join waitlist. Please try again later. (Error: ${error.message || 'Unknown'})`);
                 submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
                 submitBtn.classList.remove('playing');
