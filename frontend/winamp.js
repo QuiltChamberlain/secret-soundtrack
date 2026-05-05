@@ -44,15 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('particles-container');
         if (!container) return;
 
-        const notes = ['♪', '♫', '♬', '♩', '🎶'];
+        const texts = ['128kbps', '44kHz', '00:00', 'Winamp.exe', 'STREAMING'];
         
         setInterval(() => {
             const particle = document.createElement('div');
             particle.className = 'music-particle';
-            particle.textContent = notes[Math.floor(Math.random() * notes.length)];
+            particle.textContent = texts[Math.floor(Math.random() * texts.length)];
             
             const left = Math.random() * 100;
-            const size = Math.random() * 1.5 + 0.5;
+            const size = Math.random() * 0.5 + 0.8;
             const duration = Math.random() * 10 + 10;
             
             particle.style.left = `${left}%`;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 particle.remove();
             }, duration * 1000);
-        }, 800);
+        }, 1500);
     }
     initParticles();
     
@@ -152,11 +152,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            const labelText = submitBtn.querySelector('.vinyl-label-text');
             const originalHTML = submitBtn.innerHTML;
-            if (labelText) labelText.innerHTML = '<span style="font-size: 0.5rem; letter-spacing: 0;">SENDING</span>';
+            submitBtn.innerHTML = 'SENDING...';
             submitBtn.disabled = true;
-            submitBtn.classList.add('playing');
             try {
                 const docRef = window.doc(window.db, 'campaigns', 'waitlist', 'submissions', email.toLowerCase());
                 await window.setDoc(docRef, {
@@ -168,25 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Generate a random ticket barcode number
                 const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
 
-                // Show success state with Concert Pass Animation
+                // Show success state with You've Got Mail popup
                 waitlistForm.innerHTML = `
-                    <div class="envelope-container">
-                        <div class="envelope-wrapper">
-                            <div class="envelope-back"></div>
-                            <div class="envelope-pocket">
-                                <div class="envelope-paper ticket-paper">
-                                    <div class="ticket-header">SECRET SOUNDTRACK</div>
-                                    <div class="ticket-campaign">WAITLIST PASS</div>
-                                    <div class="ticket-barcode-container">
-                                        <div class="barcode-lines"></div>
-                                        <span class="ticket-barcode">#${ticketNum}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="envelope-front"></div>
-                            <div class="envelope-flap"></div>
+                    <div class="win95-window" style="animation: popIn 0.3s ease-out; width: 100%; max-width: 350px; margin: 0 auto;">
+                        <div class="win95-title-bar">
+                            <span>New Message</span>
+                            <div class="win95-close">x</div>
                         </div>
-                        <div class="envelope-success-text">You're on the list!</div>
+                        <div class="win95-body" style="text-align: center; padding: 30px 20px;">
+                            <div style="font-size: 48px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5)); margin-bottom: 15px; animation: bounce 1s infinite;">✉️</div>
+                            <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">YOU'VE GOT MAIL!</div>
+                            <div style="color: #333;">Ticket #${ticketNum} is enclosed.</div>
+                            <audio autoplay src="https://www.orangefreesounds.com/wp-content/uploads/2014/09/youve-got-mail-sound.mp3"></audio>
+                        </div>
                     </div>
                 `;
                 waitlistForm.style.display = 'block'; // Ensure form structure holds the envelope properly
@@ -196,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Failed to join waitlist. Please try again later. (Error: ${error.message || 'Unknown'})`);
                 submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
-                submitBtn.classList.remove('playing');
             }
         });
     }
@@ -208,23 +199,17 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
             waitlistForm.innerHTML = `
-                <div class="envelope-container">
-                    <div class="envelope-wrapper">
-                        <div class="envelope-back"></div>
-                        <div class="envelope-pocket">
-                            <div class="envelope-paper ticket-paper">
-                                <div class="ticket-header">SECRET SOUNDTRACK</div>
-                                <div class="ticket-campaign">WAITLIST PASS</div>
-                                <div class="ticket-barcode-container">
-                                    <div class="barcode-lines"></div>
-                                    <span class="ticket-barcode">#${ticketNum}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="envelope-front"></div>
-                        <div class="envelope-flap"></div>
+                <div class="win95-window" style="animation: popIn 0.3s ease-out; width: 100%; max-width: 350px; margin: 0 auto;">
+                    <div class="win95-title-bar">
+                        <span>New Message</span>
+                        <div class="win95-close">x</div>
                     </div>
-                    <div class="envelope-success-text">Test Mode: You're on the list!</div>
+                    <div class="win95-body" style="text-align: center; padding: 30px 20px;">
+                        <div style="font-size: 48px; filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5)); margin-bottom: 15px; animation: bounce 1s infinite;">✉️</div>
+                        <div style="font-weight: bold; font-size: 16px; margin-bottom: 5px;">YOU'VE GOT MAIL!</div>
+                        <div style="color: #333;">Ticket #${ticketNum} is enclosed.</div>
+                        <audio autoplay src="https://www.orangefreesounds.com/wp-content/uploads/2014/09/youve-got-mail-sound.mp3"></audio>
+                    </div>
                 </div>
             `;
             waitlistForm.style.display = 'block';

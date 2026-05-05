@@ -20,9 +20,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="frontend/index.css">
+    <link rel="stylesheet" href="frontend/gallery.css">
 </head>
 
 <body>
@@ -37,10 +37,7 @@
         </div>
     </div>
     <div class="ambient-background">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div id="particles-container"></div>
+        <!-- Clean minimal background -->
     </div>
 
     <div class="top-banner">
@@ -52,15 +49,6 @@
                 <span class="logo-icon">🎧</span>
                 Secret Soundtrack
             </div>
-            <div class="nav-links" style="display: flex; gap: 1.5rem; align-items: center;">
-                <a href="index.html" style="color: var(--text-primary); text-decoration: none; font-weight: 500;">Neon</a>
-                <a href="retro.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">Retro</a>
-                <a href="gallery.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">Gallery</a>
-                <a href="winamp.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">Winamp</a>
-                <a href="ipod.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">iPod</a>
-                <a href="napster.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">Napster</a>
-                <a href="limewire.html" style="color: var(--text-secondary); text-decoration: none; font-weight: 500;">LimeWire</a>
-            </div>
             <div style="display: flex; gap: 1rem;">
                 <button class="btn btn-outline" id="nav-cta">Join Waitlist</button>
             </div>
@@ -70,38 +58,30 @@
     <main>
         <header class="hero">
             <div class="container hero-content fade-in-up">
-                <h1 class="hero-title">Give the gift of <br><span class="text-gradient">musical discovery</span></h1>
-                <p class="hero-subtitle">A Secret Santa inspired musical swap group. Curate a custom playlist for a
-                    stranger, and receive a hand-picked soundtrack in return.</p>
-
-                <form class="waitlist-form" id="waitlist-form" action="#">
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem; flex: 1; position: relative; z-index: 2;">
-                        <input type="email" id="waitlist-email" placeholder="Enter your email address" required
-                            class="glass-input">
-                        <input type="url" id="waitlist-playlist" placeholder="Link your favorite playlist (Optional)"
-                            class="glass-input">
+                <div class="hero-visual">
+                    <div class="gallery-artwork">
+                        <div class="gallery-record"></div>
                     </div>
-                    <button type="submit" class="vinyl-submit-btn" id="waitlist-submit" title="Join Waitlist">
-                        <div class="vinyl-record-inner"></div>
-                        <div class="vinyl-label-text">
-                            <svg viewBox="0 0 100 100" width="100%" height="100%">
-                                <defs>
-                                    <path id="textPath" d="M 50, 50 m -33, 0 a 33,33 0 1,1 66,0 a 33,33 0 1,1 -66,0" />
-                                </defs>
-                                <text font-size="9" font-weight="bold" fill="white" letter-spacing="1.5">
-                                    <textPath href="#textPath" startOffset="0%" textLength="207">JOIN WAITLIST • JOIN WAITLIST • </textPath>
-                                </text>
-                            </svg>
+                </div>
+                <div class="hero-text-content">
+                    <h1 class="hero-title">Give the gift of <br><span class="text-gradient">musical discovery</span></h1>
+                    <p class="hero-subtitle">A Secret Santa inspired musical swap group. Curate a custom playlist for a stranger, and receive a hand-picked soundtrack in return.</p>
+
+                    <form class="waitlist-form gallery-form" id="waitlist-form" action="#">
+                        <div style="display: flex; flex-direction: column; gap: 1rem; flex: 1;">
+                            <input type="email" id="waitlist-email" placeholder="Enter your email address" required class="gallery-input">
+                            <input type="url" id="waitlist-playlist" placeholder="Link your favorite playlist (Optional)" class="gallery-input">
                         </div>
-                    </button>
-                </form>
-                
-                <div class="share-container fade-in-up" style="--delay: 0.2s; margin-top: 1rem; text-align: center;">
-                    <button class="btn btn-outline" id="share-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem;">
-                        <span style="font-size:1.2rem;">📤</span> Share with Friends
-                    </button>
-                    <div style="margin-top: 1rem;">
-                        <button class="btn" id="test-animation-btn" style="background: transparent; color: var(--text-secondary); text-decoration: underline; font-size: 0.8rem; border: none; padding: 0; cursor: pointer;">Test Animation (No DB write)</button>
+                        <button type="submit" class="btn btn-primary gallery-submit-btn" id="waitlist-submit" title="Join Waitlist">
+                            Join Waitlist <span class="arrow">→</span>
+                        </button>
+                    </form>
+                    
+                    <div class="share-container fade-in-up" style="--delay: 0.2s; margin-top: 2rem;">
+                        <button class="btn btn-outline" id="share-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem;">
+                            Share with Friends
+                        </button>
+                        <button class="btn" id="test-animation-btn" style="background: transparent; color: var(--text-secondary); font-size: 0.8rem; border: none; padding: 0 1rem; cursor: pointer;">Test (No DB write)</button>
                     </div>
                 </div>
             </div>
@@ -113,17 +93,17 @@
                 <p class="section-subtitle fade-in-up">Four simple steps to your new favorite playlist.</p>
 
                 <div class="steps-grid">
-                    <div class="step-card glass-card fade-in-up" style="--delay: 0.1s">
+                    <div class="step-card fade-in-up" style="--delay: 0.1s">
                         <div class="step-number">01</div>
                         <h3>Join Waitlist</h3>
                         <p>Secure your spot early. The first swaps will be limited to a small group of music enthusiasts.</p>
                     </div>
-                    <div class="step-card glass-card fade-in-up" style="--delay: 0.2s">
+                    <div class="step-card fade-in-up" style="--delay: 0.2s">
                         <div class="step-number">02</div>
                         <h3>Get an Invite</h3>
                         <p>When the platform opens, you'll receive an exclusive invitation to set up your profile and preferences.</p>
                     </div>
-                    <div class="step-card glass-card fade-in-up" style="--delay: 0.3s">
+                    <div class="step-card fade-in-up" style="--delay: 0.3s">
                         <div class="step-number">03</div>
                         <h3>Start Swapping</h3>
                         <p>We'll pair you up. Curate a playlist for a stranger, and receive a hand-picked soundtrack in return.</p>
@@ -146,7 +126,7 @@
                             <li>🎵 Expand your sonic horizons</li>
                         </ul>
                     </div>
-                    <div class="feature-visual glass-card fade-in-up">
+                    <div class="feature-visual fade-in-up">
                         <div class="mockup-playlist">
                             <div class="playlist-header">
                                 <div class="playlist-cover"></div>
@@ -207,7 +187,7 @@
 
         <section class="cta-section section fade-in-up">
             <div class="container">
-                <div class="cta-card glass-card">
+                <div class="cta-card">
                     <h2>Ready to swap?</h2>
                     <p>Our next swap event starts soon. Secure your spot and get ready to share the music you love.</p>
                     <button class="btn btn-primary btn-large" id="bottom-cta">Join the Waitlist</button>
@@ -281,7 +261,7 @@
         window.setDoc = setDoc;
         window.serverTimestamp = serverTimestamp;
     </script>
-    <script src="frontend/script.js"></script>
+    <script src="frontend/gallery.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Soundtrack | Napster Theme</title>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Theme Specific CSS -->
+    <link rel="stylesheet" href="frontend/napster.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <!-- Simple kitty logo stand-in -->
+                    <span class="cat-logo">😺</span>
+                    Secret Soundtrack
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Neon</a>
+                    <a href="retro.html">Retro</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="winamp.html">Winamp</a>
+                    <a href="ipod.html">iPod</a>
+                    <a href="napster.html" class="active">Napster</a>
+                    <a href="limewire.html">LimeWire</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-window">
+            <div class="toolbar">
+                <button class="tool-btn active">Find Music</button>
+                <button class="tool-btn">Chat</button>
+                <button class="tool-btn">Library</button>
+                <button class="tool-btn">Transfer</button>
+            </div>
+
+            <div class="search-panel">
+                <h2>Search for a stranger's playlist...</h2>
+                <form id="waitlist-form" class="search-form" action="#">
+                    <div class="input-group">
+                        <label for="waitlist-email">Email Address:</label>
+                        <input type="email" id="waitlist-email" placeholder="user@example.com" required class="napster-input">
+                    </div>
+                    <div class="input-group">
+                        <label for="waitlist-playlist">Playlist URL:</label>
+                        <input type="url" id="waitlist-playlist" placeholder="http://..." class="napster-input">
+                    </div>
+                    <button type="submit" id="waitlist-submit" class="napster-submit-btn">Search & Join</button>
+                    <button type="button" id="test-animation-btn" class="napster-test-btn">Test</button>
+                </form>
+            </div>
+
+            <div class="results-panel">
+                <div class="results-header">
+                    <div class="col-filename">File Name</div>
+                    <div class="col-size">Size</div>
+                    <div class="col-bitrate">Bitrate</div>
+                    <div class="col-freq">Freq.</div>
+                    <div class="col-length">Length</div>
+                    <div class="col-user">User</div>
+                    <div class="col-conn">Conn.</div>
+                    <div class="col-ping">Ping</div>
+                </div>
+                <div class="results-list" id="results-list">
+                    <div class="result-row">
+                        <div class="col-filename">the_strokes_-_last_nite.mp3</div>
+                        <div class="col-size">3,145 KB</div>
+                        <div class="col-bitrate">128</div>
+                        <div class="col-freq">44100</div>
+                        <div class="col-length">3:13</div>
+                        <div class="col-user">indie_kid_99</div>
+                        <div class="col-conn">Cable</div>
+                        <div class="col-ping green">85</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="col-filename">daft_punk_one_more_time.mp3</div>
+                        <div class="col-size">5,021 KB</div>
+                        <div class="col-bitrate">160</div>
+                        <div class="col-freq">44100</div>
+                        <div class="col-length">5:20</div>
+                        <div class="col-user">robot_rocker</div>
+                        <div class="col-conn">T1</div>
+                        <div class="col-ping green">42</div>
+                    </div>
+                    <div class="result-row">
+                        <div class="col-filename">Eminem - The Real Slim Shady.mp3</div>
+                        <div class="col-size">4,280 KB</div>
+                        <div class="col-bitrate">128</div>
+                        <div class="col-freq">44100</div>
+                        <div class="col-length">4:44</div>
+                        <div class="col-user">marshall_mathers</div>
+                        <div class="col-conn">56K</div>
+                        <div class="col-ping red">450</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download Status overlay (hidden by default) -->
+            <div class="download-status hidden" id="download-status">
+                <div class="status-box">
+                    <h3 id="dl-title">Connecting to peer...</h3>
+                    <div class="dl-progress-container">
+                        <div class="dl-progress-bar" id="dl-progress"></div>
+                    </div>
+                    <p id="dl-text">0 bytes / 0 bytes</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="frontend/napster.js"></script>
+</body>
+</html>

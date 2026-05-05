@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Soundtrack | LimeWire Theme</title>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- Theme Specific CSS -->
+    <link rel="stylesheet" href="frontend/limewire.css">
+</head>
+
+<body>
+    <!-- Limewire Splash Screen -->
+    <div id="lw-splash" class="splash-screen">
+        <div class="splash-content">
+            <div style="font-size: 72px; animation: pulse 1s infinite;">🍋‍🟩</div>
+            <h1 style="color: #689900; margin-top: 10px;">Secret Soundtrack PRO</h1>
+            <p style="margin-top: 5px; color: #555;">Starting up...</p>
+        </div>
+    </div>
+
+    <!-- BSOD Virus Screen -->
+    <div id="bsod-overlay" class="bsod-hidden">
+        <div class="bsod-content">
+            <span class="bsod-white-bg">Secret Soundtrack</span>
+            <br><br>
+            A fatal exception OE has occurred at 028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be
+            terminated.
+            <br><br>
+            * Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all
+            applications.
+            <br>
+            * Just kidding. You successfully joined!
+            <br><br>
+            YOU'RE ON THE LIST!
+            <br><br>
+            Waitlist Pass #<span id="bsod-ticket"></span>
+            <br><br>
+            Press any key to continue <span style="animation: blink 1s infinite">_</span>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <header class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <span class="lime-logo">🍋‍🟩</span> Secret Soundtrack PRO
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Neon</a>
+                    <a href="retro.html">Retro</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="winamp.html">Winamp</a>
+                    <a href="ipod.html">iPod</a>
+                    <a href="napster.html">Napster</a>
+                    <a href="limewire.html" class="active">LimeWire</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-window">
+            <div class="top-toolbar">
+                <div class="toolbar-btns">
+                    <button class="t-btn active">Search</button>
+                    <button class="t-btn">Monitor</button>
+                    <button class="t-btn">Connections</button>
+                    <button class="t-btn">Library</button>
+                </div>
+            </div>
+
+            <div class="split-view">
+                <div class="sidebar">
+                    <div class="sidebar-header">Search</div>
+                    <div class="sidebar-body">
+                        <form id="waitlist-form" action="#">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="waitlist-email" placeholder="user@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Playlist URL</label>
+                                <input type="url" id="waitlist-playlist" placeholder="Optional">
+                            </div>
+                            <button type="submit" id="waitlist-submit" class="lw-submit">Search</button>
+                            <button type="button" id="test-animation-btn" class="lw-test-btn"
+                                style="margin-top: 10px; font-size: 10px; width: 100%;">Test (No DB)</button>
+                            <button type="button" id="share-btn" class="lw-test-btn"
+                                style="margin-top: 5px; font-size: 11px; width: 100%; padding: 4px;">📤 Share with Friends</button>
+                        </form>
+
+                        <div class="connection-status">
+                            <div class="bars">
+                                <div class="bar full"></div>
+                                <div class="bar full"></div>
+                                <div class="bar full"></div>
+                                <div class="bar full"></div>
+                                <div class="bar empty"></div>
+                            </div>
+                            Excellent Connection
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-view">
+                    <!-- Secret Soundtrack Branding / Info Panel -->
+                    <div class="info-panel">
+                        <h2>The Musical Gift Swap</h2>
+                        <p>Welcome to the Secret Soundtrack network. By connecting your email below, you are joining a
+                            global peer-to-peer waitlist to exchange curated playlists with a complete stranger.</p>
+                        <p><strong>Step 1:</strong> Enter your email in the Search panel.<br>
+                            <strong>Step 2:</strong> Wait for your Ticket to download.<br>
+                            <strong>Step 3:</strong> Prepare to discover new music.
+                        </p>
+                    </div>
+
+                    <div class="downloads-panel">
+                        <div class="panel-header">Downloads</div>
+                        <div class="table-container">
+                            <table class="lw-table" id="downloads-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40%;">Name</th>
+                                        <th style="width: 10%;">Size</th>
+                                        <th style="width: 20%;">Status</th>
+                                        <th style="width: 15%;">Progress</th>
+                                        <th style="width: 15%; text-align: right;">Speed</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Linkin_Park_In_The_End_CD_Rip.mp3.exe</td>
+                                        <td>1.2 MB</td>
+                                        <td class="status-error">Need More Sources</td>
+                                        <td>
+                                            <div class="prog-bar">
+                                                <div class="prog-fill" style="width: 14%;"></div>
+                                            </div>
+                                        </td>
+                                        <td>0.0 KB/s</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="search-results-panel">
+                        <div class="panel-header">Search Results</div>
+                        <div class="table-container">
+                            <table class="lw-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%;">Quality</th>
+                                        <th style="width: 55%;">Name</th>
+                                        <th style="width: 15%;">Type</th>
+                                        <th style="width: 15%;">Size</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>⭐⭐⭐⭐</td>
+                                        <td>Numb_Encore_JayZ_LinkinPark.mp3</td>
+                                        <td>Audio</td>
+                                        <td>4,192 KB</td>
+                                    </tr>
+                                    <tr>
+                                        <td>⭐⭐⭐</td>
+                                        <td>Evanescence - Bring Me To Life.mp3</td>
+                                        <td>Audio</td>
+                                        <td>3,845 KB</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="lw-footer">
+            <div class="footer-content">
+                <span>&copy; 2026 Secret Soundtrack. All rights reserved.</span>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="frontend/limewire.js"></script>
+</body>
+
+</html>

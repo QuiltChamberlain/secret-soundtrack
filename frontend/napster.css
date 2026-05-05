@@ -1,0 +1,292 @@
+:root {
+    --napster-bg: #e6e6e6; /* Classic Windows gray */
+    --napster-dark-bg: #cfcfcf;
+    --napster-blue: #1c3c78; /* Deep blue from Napster UI */
+    --napster-text: #000000;
+    --napster-border-light: #ffffff;
+    --napster-border-dark: #808080;
+    --napster-border-darker: #404040;
+    --font-ui: "Tahoma", "MS Sans Serif", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2b4f99; /* Outer background, deep blue */
+    color: var(--napster-text);
+    font-family: var(--font-ui);
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    width: 100%;
+    max-width: 900px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Navbar outside the main app window */
+.navbar {
+    background: var(--napster-bg);
+    border: 2px solid;
+    border-color: var(--napster-border-light) var(--napster-border-darker) var(--napster-border-darker) var(--napster-border-light);
+    padding: 5px 10px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+    color: var(--napster-blue);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cat-logo {
+    font-size: 20px;
+    filter: sepia(1) hue-rotate(200deg) saturate(3); /* Make it somewhat blue */
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-links a {
+    color: var(--napster-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links a.active {
+    text-decoration: underline;
+}
+
+/* App Window */
+.app-window {
+    background: var(--napster-bg);
+    border: 2px solid;
+    border-color: var(--napster-border-light) var(--napster-border-darker) var(--napster-border-darker) var(--napster-border-light);
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    position: relative;
+}
+
+/* Toolbar */
+.toolbar {
+    background: var(--napster-dark-bg);
+    padding: 5px;
+    border-bottom: 1px solid var(--napster-border-dark);
+    display: flex;
+    gap: 5px;
+}
+
+.tool-btn {
+    background: var(--napster-bg);
+    border: 2px solid;
+    border-color: var(--napster-border-light) var(--napster-border-dark) var(--napster-border-dark) var(--napster-border-light);
+    padding: 5px 15px;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.tool-btn.active {
+    background: var(--napster-bg);
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+    font-weight: bold;
+}
+
+.tool-btn:active {
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+    padding: 6px 14px 4px 16px; /* shift text */
+}
+
+/* Search Panel */
+.search-panel {
+    padding: 15px;
+    background: var(--napster-bg);
+    border-bottom: 2px solid var(--napster-border-dark);
+}
+
+.search-panel h2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--napster-blue);
+}
+
+.search-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-weight: bold;
+}
+
+.napster-input {
+    border: 2px solid;
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+    padding: 4px;
+    font-family: var(--font-ui);
+    width: 200px;
+}
+
+.napster-submit-btn, .napster-test-btn {
+    background: var(--napster-bg);
+    border: 2px solid;
+    border-color: var(--napster-border-light) var(--napster-border-dark) var(--napster-border-dark) var(--napster-border-light);
+    padding: 5px 15px;
+    font-family: var(--font-ui);
+    font-weight: bold;
+    cursor: pointer;
+    height: 28px;
+}
+
+.napster-submit-btn:active, .napster-test-btn:active {
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+}
+
+/* Results Panel */
+.results-panel {
+    flex: 1;
+    background: #ffffff;
+    border: 2px solid;
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.results-header {
+    display: flex;
+    background: var(--napster-bg);
+    border-bottom: 1px solid var(--napster-border-dark);
+}
+
+.results-header > div {
+    padding: 3px 5px;
+    border-right: 1px solid var(--napster-border-dark);
+    border-bottom: 1px solid var(--napster-border-dark);
+    border-top: 1px solid var(--napster-border-light);
+    border-left: 1px solid var(--napster-border-light);
+    font-weight: normal;
+    background: var(--napster-bg);
+    white-space: nowrap;
+}
+
+.results-list {
+    flex: 1;
+    background: #fff;
+}
+
+.result-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.result-row:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.result-row > div {
+    padding: 3px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Columns */
+.col-filename { flex: 3; min-width: 150px; }
+.col-size { flex: 1; min-width: 60px; text-align: right; }
+.col-bitrate { flex: 0.5; min-width: 40px; text-align: center; }
+.col-freq { flex: 0.5; min-width: 40px; text-align: center; }
+.col-length { flex: 0.5; min-width: 40px; text-align: center; }
+.col-user { flex: 1.5; min-width: 80px; }
+.col-conn { flex: 0.5; min-width: 50px; text-align: center; }
+.col-ping { flex: 0.5; min-width: 40px; text-align: right; font-weight: bold; }
+
+.ping.green { color: #008000; }
+.ping.red { color: #ff0000; }
+
+/* Highlight row */
+.result-row.highlight {
+    background-color: var(--napster-blue);
+    color: #fff;
+}
+
+/* Download Status Box */
+.download-status {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.download-status.hidden {
+    display: none;
+}
+
+.status-box {
+    background: var(--napster-bg);
+    border: 2px solid;
+    border-color: var(--napster-border-light) var(--napster-border-darker) var(--napster-border-darker) var(--napster-border-light);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.status-box h3 {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: var(--napster-blue);
+}
+
+.dl-progress-container {
+    height: 15px;
+    background: #fff;
+    border: 2px solid;
+    border-color: var(--napster-border-dark) var(--napster-border-light) var(--napster-border-light) var(--napster-border-dark);
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.dl-progress-bar {
+    height: 100%;
+    background: var(--napster-blue);
+    width: 0%;
+}
+
+.status-box p {
+    font-size: 11px;
+}

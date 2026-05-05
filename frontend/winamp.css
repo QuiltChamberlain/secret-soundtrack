@@ -1,0 +1,525 @@
+:root {
+    /* Winamp Classic Colors */
+    --winamp-bg: #27283c; /* Dark navy */
+    --winamp-border-light: #525575;
+    --winamp-border-dark: #111119;
+    --winamp-black: #000;
+    
+    /* Title Bar */
+    --title-bg: #1e1e2d;
+    --title-text: #c0c0c0;
+    --title-lines: #c1b979; /* Yellowish lines */
+    
+    /* LCD Display */
+    --lcd-bg: #000000;
+    --lcd-text: #00ff00; /* Lime green */
+    --lcd-dim: #006600;
+    --lcd-blue: #0000cc;
+    
+    /* Typography */
+    --font-heading: 'Silkscreen', monospace;
+    --font-body: 'VT323', monospace;
+    
+    /* Win95 Colors for Loader */
+    --win95-bg: #c0c0c0;
+    --win95-border-light: #fff;
+    --win95-border-dark: #808080;
+    --win95-border-darker: #000;
+    --win95-title: #000080;
+    --win95-progress: #000080;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #e0e0e0;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--title-text);
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 #000;
+    line-height: 1.2;
+}
+
+.text-gradient {
+    color: var(--lcd-text);
+    text-shadow: 0 0 5px var(--lcd-text);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section {
+    padding: 2rem 0;
+}
+
+/* Winamp Module Style (Base for all cards) */
+.glass-card, .waitlist-form {
+    background: var(--winamp-bg);
+    border: 2px solid;
+    border-color: var(--winamp-border-light) var(--winamp-border-dark) var(--winamp-border-dark) var(--winamp-border-light);
+    padding: 0 0 1rem 0;
+    margin-bottom: 0.5rem;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+}
+
+/* Winamp Title Bar */
+.winamp-title-bar {
+    background: var(--title-bg);
+    padding: 3px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid var(--winamp-border-dark);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.winamp-title-bar::before, .winamp-title-bar::after {
+    content: '';
+    flex: 1;
+    height: 6px;
+    border-top: 2px solid var(--title-lines);
+    border-bottom: 2px solid var(--title-lines);
+    margin: 0 10px;
+}
+
+.winamp-title-text {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    color: var(--title-text);
+    white-space: nowrap;
+}
+
+/* Navbar */
+.top-banner {
+    display: none;
+}
+
+.navbar {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    color: var(--lcd-text);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Hero Section */
+.hero {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+    display: inline-block;
+    max-width: 600px;
+}
+
+/* Waitlist Form - Styled like Winamp Equalizer */
+.waitlist-form {
+    padding: 0 1rem 1.5rem 1rem;
+    max-width: 100%;
+}
+
+.lcd-display {
+    background: var(--lcd-bg);
+    border: 2px solid;
+    border-color: var(--winamp-border-dark) var(--winamp-border-light) var(--winamp-border-light) var(--winamp-border-dark);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.glass-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--lcd-dim);
+    color: var(--lcd-text);
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.glass-input::placeholder {
+    color: var(--lcd-dim);
+}
+
+.glass-input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--lcd-text);
+}
+
+.vinyl-submit-btn {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    color: #000;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: auto;
+    min-width: 150px;
+    margin: 0 auto;
+    display: block;
+}
+
+.vinyl-submit-btn:active {
+    border-color: #808080 #fff #fff #808080;
+    padding: 0.6rem 0.9rem 0.4rem 1.1rem;
+}
+
+/* Buttons */
+.btn {
+    font-family: var(--font-heading);
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #808080 #808080 #fff;
+    color: #000;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.btn:active {
+    border-color: #808080 #fff #fff #808080;
+}
+
+/* Steps Grid */
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.step-card {
+    padding-bottom: 1rem;
+}
+
+.step-number {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    color: var(--lcd-text);
+    display: inline-block;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+
+.step-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+}
+
+.step-card p {
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    padding: 0 1rem;
+    color: #ccc;
+}
+
+/* Features section */
+.features-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.feature-text {
+    padding: 0 1rem;
+}
+
+.feature-list {
+    list-style: none;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.feature-list li {
+    margin-bottom: 0.5rem;
+    color: var(--lcd-text);
+}
+
+/* Winamp Playlist Window */
+.mockup-playlist {
+    background: var(--lcd-bg);
+    border: 2px solid;
+    border-color: var(--winamp-border-dark) var(--winamp-border-light) var(--winamp-border-light) var(--winamp-border-dark);
+    padding: 5px;
+    color: var(--lcd-text);
+    font-family: var(--font-body);
+    height: 200px;
+    overflow-y: auto;
+}
+
+.playlist-header {
+    display: none; /* Hide header, keep just the track list like winamp */
+}
+
+.tracks {
+    display: flex;
+    flex-direction: column;
+}
+
+.track {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 2px 5px;
+    cursor: default;
+    font-size: 1.2rem;
+}
+
+.track:hover, .track.active {
+    background: var(--lcd-blue);
+    color: #fff;
+}
+
+.track-number {
+    width: 20px;
+    text-align: right;
+}
+
+.track-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.track-artist {
+    color: inherit;
+}
+
+/* CTA */
+.cta-card {
+    text-align: center;
+    padding: 1rem;
+}
+
+.cta-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-card p {
+    margin-bottom: 1.5rem;
+}
+
+/* Footer */
+.footer {
+    border-top: 2px solid var(--winamp-border-light);
+    background: var(--winamp-bg);
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    color: var(--lcd-text);
+    font-size: 1rem;
+}
+
+.footer-socials svg {
+    color: #c0c0c0;
+}
+
+.footer-socials svg:hover {
+    color: #fff;
+}
+
+/* Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s step-end, transform 0.3s step-end;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Particles */
+#particles-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.music-particle {
+    position: absolute;
+    color: var(--lcd-dim);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    opacity: 0.3;
+}
+
+/* Win95 Loader */
+.loader-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #008080;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-overlay.hidden {
+    display: none;
+}
+
+.win95-window {
+    background: var(--win95-bg);
+    border: 2px solid;
+    border-color: var(--win95-border-light) var(--win95-border-darker) var(--win95-border-darker) var(--win95-border-light);
+    width: 350px;
+    padding: 2px;
+    box-shadow: 1px 1px 0 #000;
+}
+
+.win95-title-bar {
+    background: var(--win95-title);
+    color: #fff;
+    padding: 3px 5px;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.win95-close {
+    background: var(--win95-bg);
+    color: #000;
+    border: 1px solid;
+    border-color: var(--win95-border-light) var(--win95-border-darker) var(--win95-border-darker) var(--win95-border-light);
+    width: 16px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: default;
+}
+
+.win95-body {
+    padding: 20px;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 12px;
+    color: #000;
+}
+
+.win95-progress-bar {
+    margin-top: 15px;
+    background: #fff;
+    border: 1px solid;
+    border-color: var(--win95-border-dark) var(--win95-border-light) var(--win95-border-light) var(--win95-border-dark);
+    height: 20px;
+    width: 100%;
+    padding: 2px;
+}
+
+.win95-progress-blocks {
+    height: 100%;
+    width: 0%;
+    background: var(--win95-title);
+    animation: win95Load 1.5s steps(10) forwards;
+}
+
+@keyframes win95Load {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Envelope Container tweaks for Winamp */
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    padding-top: 1rem;
+}
+
+.envelope-success-text {
+    font-family: var(--font-body);
+    color: var(--lcd-text);
+    margin-top: 1rem;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}

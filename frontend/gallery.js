@@ -39,56 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.fade-in-up');
     animatedElements.forEach(el => observer.observe(el));
     
-    // Initialize Particles
-    function initParticles() {
-        const container = document.getElementById('particles-container');
-        if (!container) return;
-
-        const notes = ['♪', '♫', '♬', '♩', '🎶'];
-        
-        setInterval(() => {
-            const particle = document.createElement('div');
-            particle.className = 'music-particle';
-            particle.textContent = notes[Math.floor(Math.random() * notes.length)];
-            
-            const left = Math.random() * 100;
-            const size = Math.random() * 1.5 + 0.5;
-            const duration = Math.random() * 10 + 10;
-            
-            particle.style.left = `${left}%`;
-            particle.style.fontSize = `${size}rem`;
-            particle.style.animationDuration = `${duration}s`;
-            
-            container.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, duration * 1000);
-        }, 800);
-    }
-    initParticles();
-    
-    // Add simple interactive glow to cards based on mouse position
-    const cards = document.querySelectorAll('.glass-card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            card.style.background = `
-                radial-gradient(
-                    circle at ${x}px ${y}px, 
-                    rgba(255, 255, 255, 0.08) 0%, 
-                    rgba(255, 255, 255, 0.03) 50%
-                )
-            `;
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.background = 'rgba(255, 255, 255, 0.03)';
-        });
-    });
+    // Removed Particles and Glass Glow for Gallery Theme
 
     // 1. Smooth Scrolling for CTAs
     const navCta = document.getElementById('nav-cta');
@@ -152,11 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            const labelText = submitBtn.querySelector('.vinyl-label-text');
             const originalHTML = submitBtn.innerHTML;
-            if (labelText) labelText.innerHTML = '<span style="font-size: 0.5rem; letter-spacing: 0;">SENDING</span>';
+            submitBtn.innerHTML = 'Sending...';
             submitBtn.disabled = true;
-            submitBtn.classList.add('playing');
             try {
                 const docRef = window.doc(window.db, 'campaigns', 'waitlist', 'submissions', email.toLowerCase());
                 await window.setDoc(docRef, {
@@ -196,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Failed to join waitlist. Please try again later. (Error: ${error.message || 'Unknown'})`);
                 submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
-                submitBtn.classList.remove('playing');
             }
         });
     }

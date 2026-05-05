@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Soundtrack | iPod Theme</title>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Theme Specific CSS -->
+    <link rel="stylesheet" href="frontend/ipod.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        
+        <header class="navbar">
+            <div class="nav-container">
+                <div class="logo">Secret Soundtrack</div>
+                <div class="nav-links">
+                    <a href="index.html">Neon</a>
+                    <a href="retro.html">Retro</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="winamp.html">Winamp</a>
+                    <a href="ipod.html" class="active">iPod</a>
+                    <a href="napster.html">Napster</a>
+                    <a href="limewire.html">LimeWire</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">1,000 strangers in your pocket.</h1>
+                <p class="hero-subtitle">The classic music swap experience.</p>
+                
+                <!-- The iPod Device -->
+                <div class="ipod-device">
+                    <div class="ipod-screen-container">
+                        <div class="ipod-screen">
+                            <div class="ipod-status-bar">
+                                <span class="ipod-time" id="ipod-clock">12:00 PM</span>
+                                <span class="ipod-battery">🔋</span>
+                            </div>
+                            
+                            <div class="ipod-view" id="ipod-menu-view">
+                                <div class="ipod-menu-left">
+                                    <div class="ipod-menu-title">Secret Soundtrack</div>
+                                    <ul class="ipod-menu-list">
+                                        <li class="ipod-menu-item active">Join Waitlist <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item">About <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item">Settings <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item">Shuffle Songs <span class="chevron">></span></li>
+                                    </ul>
+                                </div>
+                                <div class="ipod-menu-right">
+                                    <div class="ipod-cover-art"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="ipod-view hidden" id="ipod-form-view">
+                                <div class="ipod-menu-title">Join Waitlist</div>
+                                <form class="ipod-form" id="waitlist-form" action="#">
+                                    <input type="email" id="waitlist-email" placeholder="Email Address" required class="ipod-input">
+                                    <input type="url" id="waitlist-playlist" placeholder="Playlist URL (Optional)" class="ipod-input">
+                                    <button type="submit" class="ipod-submit-btn" id="waitlist-submit">Sign Up</button>
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="ipod-click-wheel">
+                        <div class="wheel-btn wheel-top">MENU</div>
+                        <div class="wheel-btn wheel-left">|&lt;&lt;</div>
+                        <div class="wheel-btn wheel-right">&gt;&gt;|</div>
+                        <div class="wheel-btn wheel-bottom">&gt;||</div>
+                        <div class="wheel-center-btn" id="wheel-center" title="Click to interact"></div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <section class="info-section">
+            <div class="info-container">
+                <h2>Sync your library.</h2>
+                <p>Join our waitlist to be paired with a stranger. Exchange curated playlists and discover new music, just like the good old days.</p>
+                <button class="btn btn-primary" id="test-animation-btn">Test Success Screen (No DB)</button>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">Secret Soundtrack</div>
+                    <div class="footer-socials">
+                        Built for the retro web.
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Theme Specific JS -->
+    <script src="frontend/ipod.js"></script>
+</body>
+</html>
