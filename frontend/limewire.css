@@ -345,8 +345,14 @@ body {
         min-width: 600px; /* Force scroll on small screens */
     }
     
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
     .nav-links {
-        display: none; /* Hide top nav links on very small screens for neatness or wrap them */
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 

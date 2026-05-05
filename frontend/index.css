@@ -215,7 +215,6 @@ h1, h2, h3, h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     padding-top: 150px; /* Safe clearing for banner + navbar */
     padding-bottom: 150px; /* Symmetric to keep visual center */
@@ -223,6 +222,7 @@ h1, h2, h3, h4 {
 
 .hero-content {
     max-width: 800px;
+    margin: auto;
 }
 
 .badge {
@@ -976,6 +976,23 @@ h1, h2, h3, h4 {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .top-banner {
+        position: absolute;
+    }
+    .navbar {
+        position: absolute;
+    }
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero {
+        padding-top: 250px;
+    }
     .container {
         padding: 0 1.25rem;
     }
