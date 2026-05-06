@@ -58,20 +58,86 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch(e) {}
     }
 
-    // Since the wheel is just visual here, we'll map the center button to open the waitlist if active
-    wheelCenter.addEventListener('click', () => {
+    // 3. Menu Navigation and Actions
+    const menuItems = document.querySelectorAll('.ipod-menu-item');
+    const btnLeft = document.querySelector('.wheel-left');
+    const btnRight = document.querySelector('.wheel-right');
+
+    function executeMenuAction(action) {
+        if (!action) return;
         playClickSound();
-        const activeItem = document.querySelector('.ipod-menu-item.active');
-        if (activeItem && activeItem.textContent.includes('Join Waitlist')) {
+        if (action === 'join') {
             menuView.classList.add('hidden');
             formView.classList.remove('hidden');
+        } else if (action === 'share') {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Secret Soundtrack',
+                    text: 'Give the gift of musical discovery. Join the musical swap group!',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        } else if (action === 'about') {
+            alert('Secret Soundtrack is a musical swap group. Built for the retro web.');
+        } else if (action === 'shuffle') {
+            alert('Shuffling songs... (Just kidding, this is a waitlist!)');
+        }
+    }
+
+    // Allow clicking menu items directly for mouse users
+    menuItems.forEach((item) => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            executeMenuAction(item.dataset.action);
+        });
+    });
+
+    // Center button executes current active action
+    wheelCenter.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playClickSound();
+        const activeItem = document.querySelector('.ipod-menu-item.active');
+        if (activeItem) {
+            executeMenuAction(activeItem.dataset.action);
         }
     });
 
+    // Scroll wheel simulation (click left/right to move up/down)
+    function moveSelection(direction) {
+        playClickSound();
+        const items = Array.from(document.querySelectorAll('.ipod-menu-item'));
+        const activeIndex = items.findIndex(i => i.classList.contains('active'));
+        if (activeIndex === -1) return;
+        
+        items[activeIndex].classList.remove('active');
+        let newIndex = activeIndex + direction;
+        if (newIndex < 0) newIndex = items.length - 1;
+        if (newIndex >= items.length) newIndex = 0;
+        
+        items[newIndex].classList.add('active');
+    }
+
+    btnLeft.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moveSelection(-1); // Up
+    });
+    
+    btnRight.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moveSelection(1); // Down
+    });
+
     // Clicking anywhere on the top part of the wheel acts as 'MENU' back button
-    document.querySelector('.ipod-click-wheel').addEventListener('click', (e) => {
-        // If they click the wheel but NOT the center button, go back to menu
-        if (e.target !== wheelCenter) {
+    const clickWheel = document.querySelector('.ipod-click-wheel');
+    clickWheel.addEventListener('click', (e) => {
+        // If they click the wheel but NOT the center/left/right buttons, go back to menu
+        if (e.target !== wheelCenter && e.target !== btnLeft && e.target !== btnRight) {
             playClickSound();
             formView.classList.add('hidden');
             const successView = document.getElementById('ipod-success-view');
@@ -81,6 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
             menuView.classList.remove('hidden');
         }
     });
+
+    // Add actual mouse wheel scrolling over the click wheel
+    let scrollAccumulator = 0;
+    clickWheel.addEventListener('wheel', (e) => {
+        e.preventDefault(); // Prevent page scroll
+        scrollAccumulator += e.deltaY;
+        
+        // Trigger move every 50px of scroll to prevent zooming through menus too fast
+        if (scrollAccumulator > 50) {
+            moveSelection(1);
+            scrollAccumulator = 0;
+        } else if (scrollAccumulator < -50) {
+            moveSelection(-1);
+            scrollAccumulator = 0;
+        }
+    }, { passive: false });
 
     function showSuccessScreen(ticketNum) {
         playClickSound();

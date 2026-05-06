@@ -26,9 +26,6 @@
                     <a href="napster.html">Napster</a>
                     <a href="limewire.html">LimeWire</a>
                 </div>
-                <div style="display: flex; gap: 1rem;">
-                    <button class="btn btn-outline" id="nav-cta" style="padding: 0.5rem 1rem; border: 1px solid #000; border-radius: 20px; background: transparent; cursor: pointer; font-family: var(--font-ipod);">Join Waitlist</button>
-                </div>
             </div>
         </header>
 
@@ -50,10 +47,10 @@
                                 <div class="ipod-menu-left">
                                     <div class="ipod-menu-title">Secret Soundtrack</div>
                                     <ul class="ipod-menu-list">
-                                        <li class="ipod-menu-item active">Join Waitlist <span class="chevron">></span></li>
-                                        <li class="ipod-menu-item">About <span class="chevron">></span></li>
-                                        <li class="ipod-menu-item">Settings <span class="chevron">></span></li>
-                                        <li class="ipod-menu-item">Shuffle Songs <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item active" data-action="join">Join Waitlist <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item" data-action="share">Share with Friends <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item" data-action="about">About <span class="chevron">></span></li>
+                                        <li class="ipod-menu-item" data-action="shuffle">Shuffle Songs <span class="chevron">></span></li>
                                     </ul>
                                 </div>
                                 <div class="ipod-menu-right">
@@ -90,7 +87,6 @@
                 <h2>Sync your library.</h2>
                 <p>Join our waitlist to be paired with a stranger. Exchange curated playlists and discover new music, just like the good old days.</p>
                 <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
-                    <button class="btn btn-outline" id="share-btn" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #000; border-radius: 20px; background: transparent; cursor: pointer; font-family: var(--font-ipod);">Share with Friends</button>
                     <button class="btn btn-primary" id="test-animation-btn">Test Success Screen (No DB)</button>
                 </div>
             </div>
