@@ -31,8 +31,6 @@
 
         <main class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">1,000 strangers in your pocket.</h1>
-                <p class="hero-subtitle">The classic music swap experience.</p>
                 
                 <!-- The iPod Device -->
                 <div class="ipod-device">
@@ -67,10 +65,11 @@
                                 </form>
                             </div>
 
-                            <div class="ipod-view hidden" id="ipod-about-view" style="flex-direction: column; background: #fff; padding: 10px; font-size: 12px; font-family: var(--font-ipod);">
-                                <div class="ipod-menu-title" style="margin-left: -10px; margin-right: -10px; margin-top: -10px; margin-bottom: 10px;">About</div>
-                                <p style="margin-bottom: 8px; line-height: 1.4;">Secret Soundtrack is a musical swap group.</p>
-                                <p style="line-height: 1.4;">Built for the retro web. Exchange curated playlists with strangers.</p>
+                            <div class="ipod-view hidden" id="ipod-about-view" style="flex-direction: column; background: #fff; padding: 10px; font-size: 11px; font-family: var(--font-ipod); overflow-y: auto;">
+                                <div class="ipod-menu-title" style="margin-left: -10px; margin-right: -10px; margin-top: -10px; margin-bottom: 10px; position: sticky; top: 0; background: #fff;">About</div>
+                                <p style="margin-bottom: 8px; line-height: 1.4; font-weight: bold;">1,000 strangers in your pocket.</p>
+                                <p style="margin-bottom: 8px; line-height: 1.4;">The classic music swap experience. Sync your library and join our waitlist to be paired with a stranger.</p>
+                                <p style="line-height: 1.4;">Exchange curated playlists and discover new music, just like the good old days.</p>
                             </div>
 
                             <div class="ipod-view hidden" id="ipod-share-view" style="flex-direction: column; background: #fff; align-items: center; justify-content: center; padding: 10px; font-size: 14px; font-family: var(--font-ipod); text-align: center;">
@@ -93,28 +92,7 @@
             </div>
         </main>
 
-        <section class="info-section">
-            <div class="info-container">
-                <h2>Sync your library.</h2>
-                <p>Join our waitlist to be paired with a stranger. Exchange curated playlists and discover new music, just like the good old days.</p>
-                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
-                    <button class="btn btn-primary" id="test-animation-btn">Test Success Screen (No DB)</button>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-logo">Secret Soundtrack</div>
-                    <div class="footer-socials">
-                        Built for the retro web.
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
-
     <!-- Theme Specific JS -->
     <script src="frontend/ipod.js"></script>
 </body>

@@ -205,23 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const screen = document.querySelector('.ipod-screen');
         screen.insertAdjacentHTML('beforeend', successHtml);
     }
-
-    // Test Animation
-    const testBtn = document.getElementById('test-animation-btn');
-    if (testBtn) {
-        testBtn.addEventListener('click', () => {
-            const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
-            
-            // Hide current views
-            menuView.classList.add('hidden');
-            formView.classList.add('hidden');
-            const oldSuccess = document.getElementById('ipod-success-view');
-            if (oldSuccess) oldSuccess.remove();
-
-            showSuccessScreen(ticketNum);
-        });
-    }
-
     // 3. Firebase Initialization & Waitlist Submission
     // (You should replace this with your actual config if it differs)
     fetch('/__/firebase/init.json').then(async response => {
