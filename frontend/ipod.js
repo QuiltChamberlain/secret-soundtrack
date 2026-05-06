@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formView = document.getElementById('ipod-form-view');
     const aboutView = document.getElementById('ipod-about-view');
     const shareView = document.getElementById('ipod-share-view');
+    const themesView = document.getElementById('ipod-themes-view');
     const wheelCenter = document.getElementById('wheel-center');
     const menuBtn = document.querySelector('.wheel-top'); // "MENU"
     
@@ -61,16 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 3. Menu Navigation and Actions
-    const menuItems = document.querySelectorAll('.ipod-menu-item');
     const btnLeft = document.querySelector('.wheel-left');
     const btnRight = document.querySelector('.wheel-right');
 
-    function executeMenuAction(action) {
-        if (!action) return;
+    function executeMenuAction(item) {
+        if (!item) return;
         playClickSound();
+
+        const link = item.dataset.link;
+        if (link) {
+            window.location.href = link;
+            return;
+        }
+
+        const action = item.dataset.action;
+        if (!action) return;
+
         menuView.classList.add('hidden');
         if (action === 'join') {
             formView.classList.remove('hidden');
+        } else if (action === 'themes') {
+            themesView.classList.remove('hidden');
+            // ensure at least one item is active in themes view
+            const themesItems = themesView.querySelectorAll('.ipod-menu-item');
+            themesItems.forEach(i => i.classList.remove('active'));
+            if (themesItems.length > 0) themesItems[0].classList.add('active');
         } else if (action === 'share') {
             if (navigator.share) {
                 navigator.share({
@@ -98,34 +114,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Allow clicking menu items directly for mouse users
-    menuItems.forEach((item) => {
+    document.querySelectorAll('.ipod-menu-item').forEach((item) => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
-            menuItems.forEach(i => i.classList.remove('active'));
+            // Find parent view to scope the active class
+            const parentView = item.closest('.ipod-view');
+            if (parentView) {
+                parentView.querySelectorAll('.ipod-menu-item').forEach(i => i.classList.remove('active'));
+            }
             item.classList.add('active');
-            executeMenuAction(item.dataset.action);
+            executeMenuAction(item);
         });
     });
 
-    // Center button executes current active action
+    // Center button executes current active action in the visible view
     wheelCenter.addEventListener('click', (e) => {
         e.stopPropagation();
         playClickSound();
-        const activeItem = document.querySelector('.ipod-menu-item.active');
-        if (activeItem && !menuView.classList.contains('hidden')) {
-            executeMenuAction(activeItem.dataset.action);
+        const visibleView = document.querySelector('.ipod-view:not(.hidden)');
+        if (visibleView) {
+            const activeItem = visibleView.querySelector('.ipod-menu-item.active');
+            if (activeItem) {
+                executeMenuAction(activeItem);
+            }
         }
     });
 
     // Scroll wheel simulation (click left/right to move up/down)
     function moveSelection(direction) {
-        if (menuView.classList.contains('hidden')) return; // Don't scroll if not on main menu
-        playClickSound();
-        const items = Array.from(document.querySelectorAll('.ipod-menu-item'));
-        const activeIndex = items.findIndex(i => i.classList.contains('active'));
-        if (activeIndex === -1) return;
+        const visibleView = document.querySelector('.ipod-view:not(.hidden)');
+        if (!visibleView) return;
         
-        items[activeIndex].classList.remove('active');
+        const items = Array.from(visibleView.querySelectorAll('.ipod-menu-item'));
+        if (items.length === 0) return; // Not a menu view
+        
+        playClickSound();
+        const activeIndex = items.findIndex(i => i.classList.contains('active'));
+        if (activeIndex !== -1) {
+            items[activeIndex].classList.remove('active');
+        }
+        
         let newIndex = activeIndex + direction;
         if (newIndex < 0) newIndex = items.length - 1;
         if (newIndex >= items.length) newIndex = 0;
@@ -152,6 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formView.classList.add('hidden');
             if (aboutView) aboutView.classList.add('hidden');
             if (shareView) shareView.classList.add('hidden');
+            if (themesView) themesView.classList.add('hidden');
             const successView = document.getElementById('ipod-success-view');
             if (successView) {
                 successView.remove();
