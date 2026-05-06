@@ -353,6 +353,7 @@ body {
         inset 0 2px 5px rgba(0,0,0,0.1),
         0 1px 1px rgba(255,255,255,1);
     cursor: pointer;
+    touch-action: none; /* Prevents the page from panning/scrolling when using the wheel on mobile */
 }
 
 .wheel-center-btn {
