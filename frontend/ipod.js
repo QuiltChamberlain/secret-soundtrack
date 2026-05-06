@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. iPod UI Navigation
     const menuView = document.getElementById('ipod-menu-view');
     const formView = document.getElementById('ipod-form-view');
+    const aboutView = document.getElementById('ipod-about-view');
+    const shareView = document.getElementById('ipod-share-view');
     const wheelCenter = document.getElementById('wheel-center');
     const menuBtn = document.querySelector('.wheel-top'); // "MENU"
     
@@ -66,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function executeMenuAction(action) {
         if (!action) return;
         playClickSound();
+        menuView.classList.add('hidden');
         if (action === 'join') {
-            menuView.classList.add('hidden');
             formView.classList.remove('hidden');
         } else if (action === 'share') {
             if (navigator.share) {
@@ -75,16 +77,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     title: 'Secret Soundtrack',
                     text: 'Give the gift of musical discovery. Join the musical swap group!',
                     url: window.location.href
-                }).catch(console.error);
+                }).then(() => {
+                    // Go back to menu if share sheet was dismissed successfully
+                    menuView.classList.remove('hidden');
+                }).catch((e) => {
+                    console.error(e);
+                    menuView.classList.remove('hidden');
+                });
             } else {
                 navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('Link copied to clipboard!');
+                    shareView.classList.remove('hidden');
                 });
             }
         } else if (action === 'about') {
-            alert('Secret Soundtrack is a musical swap group. Built for the retro web.');
+            aboutView.classList.remove('hidden');
         } else if (action === 'shuffle') {
-            alert('Shuffling songs... (Just kidding, this is a waitlist!)');
+            // Re-use success screen for shuffle
+            showSuccessScreen("SHUFFLE", "Random User Playlist");
         }
     }
 
@@ -103,13 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         playClickSound();
         const activeItem = document.querySelector('.ipod-menu-item.active');
-        if (activeItem) {
+        if (activeItem && !menuView.classList.contains('hidden')) {
             executeMenuAction(activeItem.dataset.action);
         }
     });
 
     // Scroll wheel simulation (click left/right to move up/down)
     function moveSelection(direction) {
+        if (menuView.classList.contains('hidden')) return; // Don't scroll if not on main menu
         playClickSound();
         const items = Array.from(document.querySelectorAll('.ipod-menu-item'));
         const activeIndex = items.findIndex(i => i.classList.contains('active'));
@@ -140,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target !== wheelCenter && e.target !== btnLeft && e.target !== btnRight) {
             playClickSound();
             formView.classList.add('hidden');
+            if (aboutView) aboutView.classList.add('hidden');
+            if (shareView) shareView.classList.add('hidden');
             const successView = document.getElementById('ipod-success-view');
             if (successView) {
                 successView.remove();
@@ -164,18 +176,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: false });
 
-    function showSuccessScreen(ticketNum) {
+    function showSuccessScreen(ticketNum, customArtist) {
         playClickSound();
         formView.classList.add('hidden');
         
+        const titleText = customArtist ? ticketNum : `Waitlist Pass #${ticketNum}`;
+        const artistText = customArtist ? customArtist : 'Secret Soundtrack';
+
         // Create "Now Playing" Success View
         const successHtml = `
             <div class="ipod-view" id="ipod-success-view" style="flex-direction: column; background: #fff; align-items: center; padding-top: 10px;">
                 <div class="ipod-menu-title" style="width: 100%; margin-bottom: 10px;">Now Playing</div>
                 <div class="now-playing-art"></div>
                 <div class="now-playing-info">
-                    <div class="np-title">Waitlist Pass #${ticketNum}</div>
-                    <div class="np-artist">Secret Soundtrack</div>
+                    <div class="np-title">${titleText}</div>
+                    <div class="np-artist">${artistText}</div>
                     <div style="font-size: 10px; margin: 10px 0 5px; color: #666; display: flex; justify-content: space-between; padding: 0 10px;">
                         <span>0:00</span>
                         <span>-4:20</span>
