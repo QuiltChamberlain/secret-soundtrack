@@ -205,53 +205,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: false });
 
-    // Add touch support for the click wheel (circular motion)
+    // Add touch/pointer support for the click wheel (circular motion)
     let lastAngle = null;
     let touchScrollAccumulator = 0;
+    let isDragging = false;
 
-    clickWheel.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-            const touch = e.touches[0];
-            const rect = clickWheel.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            lastAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX) * (180 / Math.PI);
+    clickWheel.addEventListener('pointerdown', (e) => {
+        if (!e.isPrimary) return;
+        isDragging = true;
+        clickWheel.setPointerCapture(e.pointerId);
+        
+        const rect = clickWheel.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        lastAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+    });
+
+    clickWheel.addEventListener('pointermove', (e) => {
+        if (!isDragging || lastAngle === null || !e.isPrimary) return;
+        
+        const rect = clickWheel.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        let currentAngle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+        
+        let angleDiff = currentAngle - lastAngle;
+        
+        // Handle wrapping across 180 / -180 boundary
+        if (angleDiff > 180) angleDiff -= 360;
+        if (angleDiff < -180) angleDiff += 360;
+        
+        touchScrollAccumulator += angleDiff;
+        lastAngle = currentAngle;
+
+        // Trigger move every 15 degrees of rotation
+        if (touchScrollAccumulator > 15) {
+            moveSelection(1); // Clockwise -> Down
+            touchScrollAccumulator = 0;
+        } else if (touchScrollAccumulator < -15) {
+            moveSelection(-1); // Counter-Clockwise -> Up
+            touchScrollAccumulator = 0;
         }
-    }, { passive: true });
+    });
 
-    clickWheel.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 1 && lastAngle !== null) {
-            e.preventDefault(); // Prevent page scroll while using wheel
-            const touch = e.touches[0];
-            const rect = clickWheel.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            let currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX) * (180 / Math.PI);
-            
-            let angleDiff = currentAngle - lastAngle;
-            
-            // Handle wrapping across 180 / -180 boundary
-            if (angleDiff > 180) angleDiff -= 360;
-            if (angleDiff < -180) angleDiff += 360;
-            
-            touchScrollAccumulator += angleDiff;
-            lastAngle = currentAngle;
-
-            // Trigger move every 15 degrees of rotation
-            if (touchScrollAccumulator > 15) {
-                moveSelection(1); // Clockwise -> Down
-                touchScrollAccumulator = 0;
-            } else if (touchScrollAccumulator < -15) {
-                moveSelection(-1); // Counter-Clockwise -> Up
-                touchScrollAccumulator = 0;
-            }
-        }
-    }, { passive: false });
-
-    clickWheel.addEventListener('touchend', () => {
+    const stopDragging = (e) => {
+        if (!e.isPrimary) return;
+        isDragging = false;
         lastAngle = null;
         touchScrollAccumulator = 0;
-    });
+        try { clickWheel.releasePointerCapture(e.pointerId); } catch(err) {}
+    };
+
+    clickWheel.addEventListener('pointerup', stopDragging);
+    clickWheel.addEventListener('pointercancel', stopDragging);
 
     function showSuccessScreen(ticketNum, customArtist) {
         playClickSound();
