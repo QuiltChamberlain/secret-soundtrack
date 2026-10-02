@@ -161,31 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
         items[newIndex].classList.add('active');
     }
 
-    btnLeft.addEventListener('click', (e) => {
-        e.stopPropagation();
-        moveSelection(-1); // Up
-    });
-    
-    btnRight.addEventListener('click', (e) => {
-        e.stopPropagation();
-        moveSelection(1); // Down
-    });
+    let hasDragged = false;
 
-    // Clicking anywhere on the top part of the wheel acts as 'MENU' back button
+    // Clicking anywhere on the wheel (quadrant detection)
     const clickWheel = document.querySelector('.ipod-click-wheel');
     clickWheel.addEventListener('click', (e) => {
-        // If they click the wheel but NOT the center/left/right buttons, go back to menu
-        if (e.target !== wheelCenter && e.target !== btnLeft && e.target !== btnRight) {
-            playClickSound();
-            formView.classList.add('hidden');
-            if (aboutView) aboutView.classList.add('hidden');
-            if (shareView) shareView.classList.add('hidden');
-            if (themesView) themesView.classList.add('hidden');
-            const successView = document.getElementById('ipod-success-view');
-            if (successView) {
-                successView.remove();
+        if (hasDragged) return; // Prevent click if it was a drag
+        
+        // Ignore if clicking the center button
+        if (e.target === wheelCenter || wheelCenter.contains(e.target)) return;
+
+        const rect = clickWheel.getBoundingClientRect();
+        const x = e.clientX - rect.left - (rect.width / 2);
+        const y = e.clientY - rect.top - (rect.height / 2);
+        
+        if (Math.abs(x) > Math.abs(y)) {
+            // Left or Right
+            if (x > 0) {
+                moveSelection(1); // Right (Down)
+            } else {
+                moveSelection(-1); // Left (Up)
             }
-            menuView.classList.remove('hidden');
+        } else {
+            // Top or Bottom
+            if (y < 0) {
+                // Top (MENU)
+                playClickSound();
+                formView.classList.add('hidden');
+                if (aboutView) aboutView.classList.add('hidden');
+                if (shareView) shareView.classList.add('hidden');
+                if (themesView) themesView.classList.add('hidden');
+                const successView = document.getElementById('ipod-success-view');
+                if (successView) {
+                    successView.remove();
+                }
+                menuView.classList.remove('hidden');
+            } else {
+                // Bottom (Play/Pause)
+                playClickSound();
+            }
         }
     });
 
@@ -213,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clickWheel.addEventListener('pointerdown', (e) => {
         if (!e.isPrimary) return;
         isDragging = true;
+        hasDragged = false;
         clickWheel.setPointerCapture(e.pointerId);
         
         const rect = clickWheel.getBoundingClientRect();
@@ -234,6 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle wrapping across 180 / -180 boundary
         if (angleDiff > 180) angleDiff -= 360;
         if (angleDiff < -180) angleDiff += 360;
+        
+        if (Math.abs(angleDiff) > 2) hasDragged = true;
         
         touchScrollAccumulator += angleDiff;
         lastAngle = currentAngle;
