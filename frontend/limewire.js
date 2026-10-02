@@ -119,41 +119,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initialize Firebase
-    fetch('/__/firebase/init.json').then(async response => {
-        const config = await response.json();
-        firebase.initializeApp(config);
-        const db = firebase.firestore();
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('waitlist-submit');
+            submitBtn.disabled = true;
 
-        if (waitlistForm) {
-            waitlistForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitBtn = document.getElementById('waitlist-submit');
-                submitBtn.disabled = true;
+            const email = document.getElementById('waitlist-email').value;
+            const playlist = document.getElementById('waitlist-playlist').value;
 
-                const email = document.getElementById('waitlist-email').value;
-                const playlist = document.getElementById('waitlist-playlist').value;
-
-                try {
-                    await db.collection('waitlist').add({
-                        email: email,
-                        playlistUrl: playlist,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                        source: 'limewire_theme'
-                    });
-
-                    const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
-                    startDownload(ticketNum);
-
-                } catch (error) {
-                    console.error("Firestore Error:", error);
-                    alert("Unable to connect to host.");
-                } finally {
-                    submitBtn.disabled = false;
+            try {
+                if (window.submitToWaitlist) {
+                    await window.submitToWaitlist(email, playlist, 'limewire_theme');
+                } else {
+                    throw new Error("Firebase not initialized");
                 }
-            });
-        }
-    }).catch(error => {
-        console.warn("Firebase not initialized locally. Ensure this is served via Firebase Hosting or local emulator.", error);
-    });
+
+                const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
+                startDownload(ticketNum);
+
+            } catch (error) {
+                console.error("Firestore Error:", error);
+                alert("Unable to connect to host.");
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });

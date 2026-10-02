@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const playlist = playlistInput ? playlistInput.value.trim() : '';
             
             if (!email) return;
-            if (!window.db || !window.setDoc || !window.doc) {
+            if (!window.submitToWaitlist) {
                 alert("Database not initialized yet. Please try again in a moment.");
                 return;
             }
@@ -158,12 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.classList.add('playing');
             try {
-                const docRef = window.doc(window.db, 'campaigns', 'waitlist', 'submissions', email.toLowerCase());
-                await window.setDoc(docRef, {
-                    email: email,
-                    playlistUrl: playlist,
-                    lastUpdatedAt: window.serverTimestamp()
-                }, { merge: true });
+                await window.submitToWaitlist(email, playlist, 'neon_theme');
                 
                 // Generate a random ticket barcode number
                 const ticketNum = Math.floor(10000000 + Math.random() * 90000000);

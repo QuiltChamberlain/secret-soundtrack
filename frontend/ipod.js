@@ -288,47 +288,36 @@ document.addEventListener('DOMContentLoaded', () => {
         const screen = document.querySelector('.ipod-screen');
         screen.insertAdjacentHTML('beforeend', successHtml);
     }
-    // 3. Firebase Initialization & Waitlist Submission
-    // (You should replace this with your actual config if it differs)
-    fetch('/__/firebase/init.json').then(async response => {
-        const config = await response.json();
-        firebase.initializeApp(config);
-        const db = firebase.firestore();
+    // 3. Waitlist Submission
+    const waitlistForm = document.getElementById('waitlist-form');
+    const submitBtn = document.getElementById('waitlist-submit');
 
-        const waitlistForm = document.getElementById('waitlist-form');
-        const submitBtn = document.getElementById('waitlist-submit');
+    if (waitlistForm) {
+        waitlistForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.innerHTML = 'Saving...';
+            submitBtn.disabled = true;
 
-        if (waitlistForm) {
-            waitlistForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                submitBtn.innerHTML = 'Saving...';
-                submitBtn.disabled = true;
+            const email = document.getElementById('waitlist-email').value;
+            const playlist = document.getElementById('waitlist-playlist').value;
 
-                const email = document.getElementById('waitlist-email').value;
-                const playlist = document.getElementById('waitlist-playlist').value;
-
-                try {
-                    // Save to Firestore
-                    await db.collection('waitlist').add({
-                        email: email,
-                        playlistUrl: playlist,
-                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                        source: 'ipod_theme'
-                    });
-
-                    // Generate Ticket
-                    const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
-                    showSuccessScreen(ticketNum);
-
-                } catch (error) {
-                    console.error("Firestore Error:", error);
-                    alert(`Failed to join waitlist. Please try again later.`);
-                    submitBtn.innerHTML = 'Sign Up';
-                    submitBtn.disabled = false;
+            try {
+                if (window.submitToWaitlist) {
+                    await window.submitToWaitlist(email, playlist, 'ipod_theme');
+                } else {
+                    throw new Error("Firebase not initialized");
                 }
-            });
-        }
-    }).catch(error => {
-        console.warn("Firebase not initialized locally. Ensure this is served via Firebase Hosting or local emulator.", error);
-    });
+
+                // Generate Ticket
+                const ticketNum = Math.floor(10000000 + Math.random() * 90000000);
+                showSuccessScreen(ticketNum);
+
+            } catch (error) {
+                console.error("Firestore Error:", error);
+                alert(`Failed to join waitlist. Please try again later.`);
+                submitBtn.innerHTML = 'Sign Up';
+                submitBtn.disabled = false;
+            }
+        });
+    }
 });
