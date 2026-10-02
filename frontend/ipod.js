@@ -226,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clickWheel.addEventListener('pointerdown', (e) => {
         if (!e.isPrimary) return;
+        if (e.target === wheelCenter || wheelCenter.contains(e.target)) return;
         isDragging = true;
         hasDragged = false;
         clickWheel.setPointerCapture(e.pointerId);
